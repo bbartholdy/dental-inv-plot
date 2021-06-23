@@ -13,9 +13,9 @@ library(here)
 dental_inv <- readr::read_csv(here("data", "dental-inv.csv"))
 ```
 
-This is a tutorial on an intuitive way to visualise a dental inventory in a 
-sample. It requires only a basic knowledge of R, and, of course, that you have 
-installed it along with RStudio.
+This is a tutorial on an intuitive (or at very least pretty) way to visualise a
+dental inventory in a sample. It requires only a basic knowledge of R, and, of
+course, that you have installed it along with RStudio.
 
 Required packages:
 
@@ -25,7 +25,7 @@ Required packages:
 ### Upload data
 
 ```{r upload, eval=FALSE}
-dental_inv <- readr::read_csv("https://github.com/bbartholdy/dental-inv-plot/data/dental-inv.csv")
+dental_inv <- readr::read_csv("https://raw.githubusercontent.com/bbartholdy/dental-inv-plot/main/data/dental-inv.csv")
 ```
 
 The variables are:
