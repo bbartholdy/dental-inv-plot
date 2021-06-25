@@ -1,5 +1,5 @@
 ---
-title: "Plotting Dental Inventory"
+title: "Plotting Dental Inventory with ggplot2"
 author: Bjorn
 output: 
   html_document: 
