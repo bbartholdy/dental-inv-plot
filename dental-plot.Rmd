@@ -8,7 +8,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(cowplot)
+#library(cowplot) # combining the plots is more efficient with patchwork
+library(patchwork)
 library(here)
 dental_inv <- readr::read_csv(here("data", "dental-inv.csv"))
 ```
@@ -20,7 +21,7 @@ course, that you have installed it along with RStudio.
 Required packages:
 
 - tidyverse
-- cowplot
+- patchwork
 
 ### Upload data
 
@@ -87,9 +88,9 @@ lower_order
 <br>
 
 The plots for the maxilla and mandible are prepared separately, then combined
-with the **cowplot** package.
+with the **patchwork** package.
 
-First, the plot of the maxillary dentition.
+First, the plot of the maxillary dentition:
 
 ```{r prepare-max}
 # Plot for the maxillary dentition
@@ -107,19 +108,7 @@ maxilla_pl
 
 <br>
 
-In order for the plots to have a shared legend, rather than two identical legends,
-we need to extract the legend from the plots using the `get_legend` function, 
-then remove it from the plot.
-
-```{r prepare-legend}
-pl_legend <- get_legend(maxilla_pl) # extract legend from plot
-maxilla_pl <- maxilla_pl + theme(legend.position = "none") # remove legend
-maxilla_pl
-```
-
-<br>
-
-Then, the plot of the mandibular dentition (without a legend).
+Then, the plot of the mandibular dentition:
 
 ```{r prepare-mand}
 # Plot for the mandibular dentition
@@ -130,8 +119,7 @@ mandible_pl <- dental_inv_long %>%
   geom_bar(position = "stack") +
   theme_minimal() +
   theme(axis.title.x = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "none") +
+        panel.grid = element_blank()) +
   scale_fill_viridis_d()
 
 mandible_pl
@@ -141,21 +129,23 @@ mandible_pl
 
 ### Combine plots
 
-The two dental plots are combined using the `plot_grid` function in the **cowplot**
-package.
+The two dental plots are combined using the **patchwork** package. We will separate
+them using `/` instead of `+`, because we want one on top of the other to mimic
+the maxilla's and mandible's position in the mouth:
 
 ```{r combine-pl}
-plot_comb <- plot_grid(maxilla_pl, mandible_pl, 
-                       ncol = 1) # ncol = 1 so the plots are one on top of the other
-plot_comb
+maxilla_pl / mandible_pl
 ```
 
 <br>
 
-Then we add the legend to another `plot_grid` and adjust the width.
+UPDATE: The `plot_layout` function allows us to easily combine the identical
+legends. Thanks [@jfy133](https://twitter.com/jfy133) for bringing it to my 
+attention! (and of course [@thomasp85](https://twitter.com/thomasp85), the 
+package developer)
 
 ```{r final-pl}
-plot_grid(plot_comb, pl_legend, nrow = 1, rel_widths = c(4,1))
+maxilla_pl / mandible_pl + plot_layout(guides = "collect")
 ```
 
 <br>
