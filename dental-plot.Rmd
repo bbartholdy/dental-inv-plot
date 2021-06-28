@@ -130,8 +130,8 @@ mandible_pl
 ### Combine plots
 
 UPDATE: The two dental plots are combined using the **patchwork** package. 
-Thanks [@jfy133](https://twitter.com/jfy133) for bringing it to my 
-attention! (and of course [@thomasp85](https://twitter.com/thomasp85), the 
+Thanks @[jfy133](https://twitter.com/jfy133) for bringing it to my 
+attention! (and of course @[thomasp85](https://twitter.com/thomasp85), the 
 package developer)
 
 We will combine them using `/` instead of `+`, because we want one on top of the
