@@ -129,9 +129,13 @@ mandible_pl
 
 ### Combine plots
 
-The two dental plots are combined using the **patchwork** package. We will separate
-them using `/` instead of `+`, because we want one on top of the other to mimic
-the maxilla's and mandible's position in the mouth:
+UPDATE: The two dental plots are combined using the **patchwork** package. 
+Thanks [@jfy133](https://twitter.com/jfy133) for bringing it to my 
+attention! (and of course [@thomasp85](https://twitter.com/thomasp85), the 
+package developer)
+
+We will combine them using `/` instead of `+`, because we want one on top of the
+other to mimic the maxilla's and mandible's position in the mouth:
 
 ```{r combine-pl}
 maxilla_pl / mandible_pl
@@ -139,10 +143,8 @@ maxilla_pl / mandible_pl
 
 <br>
 
-UPDATE: The `plot_layout` function allows us to easily combine the identical
-legends. Thanks [@jfy133](https://twitter.com/jfy133) for bringing it to my 
-attention! (and of course [@thomasp85](https://twitter.com/thomasp85), the 
-package developer)
+The `plot_layout` function allows us to easily combine the identical
+legends. 
 
 ```{r final-pl}
 maxilla_pl / mandible_pl + plot_layout(guides = "collect")
